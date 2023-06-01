@@ -16,7 +16,7 @@ const mailer = nodemailer.createTransport({
     },
 });
 
-const webserverPort = parseInt(process.env.WEBSERVER_PORT);
+const webserverPort = parseInt(process.env.WEBSERVER_PORT || 3000);
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
@@ -77,7 +77,7 @@ Event: ${data.event}
 }
 
 function checkEnv() {
-    const REQUIRED = ['WEBSERVER_PORT', 'WEBHOOK_TOKEN', 'SMTP_HOST', 'SMTP_SENDER'];
+    const REQUIRED = ['WEBHOOK_TOKEN', 'SMTP_HOST', 'SMTP_SENDER'];
     let pass = true;
     REQUIRED.forEach(v => {
         if(process.env[v] === undefined) {
